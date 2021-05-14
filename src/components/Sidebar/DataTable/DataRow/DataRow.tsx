@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { DailyData } from 'interfaces';
 import { TableRow, TableCell, TextField } from '@material-ui/core';
+import { usageIsValid } from './DataRow-utils';
 
 export interface Props {
   day: string,
@@ -9,6 +10,21 @@ export interface Props {
 }
 
 const DataRow: React.FC<Props> = ({ day, dayData, dataChangeHandler }) => {
+  let [invalidUsage, setInvalidUsage] = useState<boolean>(false);
+
+  function handleChangeIfValid (key: string, value: string) {
+    if (key === 'usage') {
+      if (!usageIsValid(value)) {
+        setInvalidUsage (true);
+        setTimeout(() => setInvalidUsage(false), 200);
+        return;
+      } else if (invalidUsage && usageIsValid(value)) {
+        setInvalidUsage(false);
+      }
+    }
+    dataChangeHandler(day, key, value);
+  }
+
   return (
     <TableRow>
 
@@ -26,7 +42,7 @@ const DataRow: React.FC<Props> = ({ day, dayData, dataChangeHandler }) => {
           size='small'
           margin='none'
           inputProps={{style: {padding: '0.3rem'}}}
-          onChange={(e) => dataChangeHandler(day, 'time', e.currentTarget.value)}
+          onChange={(e) => handleChangeIfValid('time', e.currentTarget.value)}
           />
       </TableCell>
 
@@ -38,19 +54,20 @@ const DataRow: React.FC<Props> = ({ day, dayData, dataChangeHandler }) => {
           size='small'
           margin='none'
           inputProps={{style: {padding: '0.3rem'}}}
-          onChange={(e) => dataChangeHandler(day, 'location', e.currentTarget.value)}
+          onChange={(e) => handleChangeIfValid('location', e.currentTarget.value)}
           />
       </TableCell>
 
       {/* USAGE */}
       <TableCell align="left">
         <TextField
+        error={invalidUsage}
         variant='outlined'
         value={dayData.usage}
         size='small'
         margin='none'
         inputProps={{style: {padding: '0.3rem'}}}
-        onChange={(e) => dataChangeHandler(day, 'usage', e.currentTarget.value)}
+        onChange={(e) => handleChangeIfValid('usage', e.currentTarget.value)}
         />
       </TableCell>
 

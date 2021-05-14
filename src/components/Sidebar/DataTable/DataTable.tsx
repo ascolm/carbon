@@ -31,10 +31,21 @@ const DataTable: React.FC<Props> = (props: Props) => {
 
         <TableHead >
           <TableRow>
-            <TableCell>Day</TableCell>
-            <TableCell align="left"><ScheduleIcon color='primary' className={classes.headerIcon}/> <p className={classes.headerText}>Time</p></TableCell>
-            <TableCell align="left"><RoomIcon color='primary' className={classes.headerIcon}/> <p className={classes.headerText}>Location</p></TableCell>
-            <TableCell align="left"><OfflineBoltIcon color='primary' className={classes.headerIcon}/> <p className={classes.headerText}>Usage (mwh)</p></TableCell>
+            <TableCell>
+              Day
+            </TableCell>
+
+            <TableCell align="left">
+              <ScheduleIcon color='primary' className={classes.headerIcon}/> <p className={classes.headerText}>Time</p>
+            </TableCell>
+
+            <TableCell align="left">
+              <RoomIcon color='primary' className={classes.headerIcon}/> <p className={classes.headerText}>Location</p>
+            </TableCell>
+
+            <TableCell align="left">
+              <OfflineBoltIcon color='primary' className={classes.headerIcon}/> <p className={classes.headerText}>Usage (mwh)</p>
+            </TableCell>
           </TableRow>
         </TableHead>
 
