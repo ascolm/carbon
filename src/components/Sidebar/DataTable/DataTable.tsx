@@ -1,14 +1,29 @@
 import useStyles from './DataTable-styles';
+import { useState } from 'react';
 import { TableContainer, Table, TableRow, TableHead, TableCell, TableBody, Paper, TextField } from '@material-ui/core';
 import ScheduleIcon from '@material-ui/icons/Schedule';
 import RoomIcon from '@material-ui/icons/Room';
 import OfflineBoltIcon from '@material-ui/icons/OfflineBolt';
+import { DailyData, WeeklyData } from 'interfaces';
+import { blankData } from './DataTable-utils';
+import DataRow from './DataRow/DataRow';
 
 export interface Props {
 }
 
 const DataTable: React.FC<Props> = (props: Props) => {
+  let [weeklyData, setWeeklyData] = useState<WeeklyData>(blankData);
+
   const classes = useStyles();
+
+  function dataChangeHandler (day: string, key: string, value: string) {
+    console.log(weeklyData);
+    setWeeklyData(prevData => {
+      const newState = Object.assign({}, prevData);
+      newState[day][key] = value;
+      return newState;
+    })
+  }
 
   return (
     <TableContainer component={Paper}>
@@ -24,12 +39,9 @@ const DataTable: React.FC<Props> = (props: Props) => {
         </TableHead>
 
         <TableBody>
-          <TableRow>
-            <TableCell component="th" scope="row">Monday</TableCell>
-            <TableCell align="left"><TextField variant='outlined' type='time' size='small' margin='none' inputProps={{style: {padding: '0.3rem'}}}/></TableCell>
-            <TableCell align="left"><TextField variant='outlined' size='small' margin='none' inputProps={{style: {padding: '0.3rem'}}}/></TableCell>
-            <TableCell align="left"><TextField variant='outlined' size='small'margin='none' inputProps={{style: {padding: '0.3rem'}}}/></TableCell>
-          </TableRow>
+          {Object.keys(weeklyData).map(day => {
+            return <DataRow day={day} dayData={weeklyData[day]} dataChangeHandler={dataChangeHandler}/>
+          })}
         </TableBody>
 
       </Table>

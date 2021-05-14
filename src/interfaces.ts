@@ -1,7 +1,8 @@
 export interface DailyData {
   location: string,
   time: string,
-  usage: string
+  usage: string,
+  [index: string]: string
 }
 
 export interface WeeklyData {
