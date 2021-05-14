@@ -4,6 +4,7 @@ import projectTheme from 'theme';
 import { ThemeProvider } from '@material-ui/core';
 import useStyles from './App-styles';
 import Topbar from 'components/Topbar/Topbar';
+import Sidebar from 'components/Sidebar/Sidebar';
 
 function App() {
   let [drawerIsOpen, setDrawerIsOpen] = useState<boolean>(true);
@@ -21,7 +22,8 @@ function App() {
   return (
     <div className={classes.root}>
       <ThemeProvider theme={projectTheme}>
-        <Topbar drawerHandler={drawerHandler}></Topbar>
+        <Topbar drawerHandler={drawerHandler}/>
+        <Sidebar drawerIsOpen={drawerIsOpen}/>
       </ThemeProvider>
     </div>
   );
