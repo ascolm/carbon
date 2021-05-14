@@ -5,25 +5,16 @@ import ScheduleIcon from '@material-ui/icons/Schedule';
 import RoomIcon from '@material-ui/icons/Room';
 import OfflineBoltIcon from '@material-ui/icons/OfflineBolt';
 import { DailyData, WeeklyData } from 'interfaces';
-import { blankData } from './DataTable-utils';
 import DataRow from './DataRow/DataRow';
+import React from 'react';
 
 export interface Props {
+  weeklyData: WeeklyData,
+  dataChangeHandler: (day: string, key: string, value: string) => void
 }
 
-const DataTable: React.FC<Props> = (props: Props) => {
-  let [weeklyData, setWeeklyData] = useState<WeeklyData>(blankData);
-
+const DataTable: React.FC<Props> = ({ weeklyData, dataChangeHandler }) => {
   const classes = useStyles();
-
-  function dataChangeHandler (day: string, key: string, value: string) {
-    console.log(weeklyData);
-    setWeeklyData(prevData => {
-      const newState = Object.assign({}, prevData);
-      newState[day][key] = value;
-      return newState;
-    })
-  }
 
   return (
     <TableContainer component={Paper}>
@@ -60,4 +51,4 @@ const DataTable: React.FC<Props> = (props: Props) => {
   );
 }
 
-export default DataTable;
+export default React.memo(DataTable);
