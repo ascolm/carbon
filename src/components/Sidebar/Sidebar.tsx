@@ -27,6 +27,7 @@ const Sidebar: React.FC<Props> = ({ drawerIsOpen, drawerHandler }) => {
 
   function generateButtonHandler (e: React.MouseEvent) {
     e.preventDefault();
+    console.log(weeklyData);
     drawerHandler(false);
   }
 
