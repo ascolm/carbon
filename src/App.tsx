@@ -9,9 +9,9 @@ import Sidebar from 'components/Sidebar/Sidebar';
 function App() {
   let [drawerIsOpen, setDrawerIsOpen] = useState<boolean>(true);
 
-  function drawerHandler (newState?: boolean) {
-    if (newState) {
-      setDrawerIsOpen(newState);
+  function drawerHandler (isOpen?: boolean) {
+    if (isOpen) {
+      setDrawerIsOpen(isOpen);
     } else {
       setDrawerIsOpen(prev => !prev);
     }
@@ -22,8 +22,8 @@ function App() {
   return (
     <div className={classes.root}>
       <ThemeProvider theme={projectTheme}>
-        <Topbar drawerHandler={drawerHandler}/>
-        <Sidebar drawerIsOpen={drawerIsOpen}/>
+        <Topbar drawerHandler={drawerHandler} drawerIsOpen={drawerIsOpen}/>
+        <Sidebar drawerHandler={drawerHandler} drawerIsOpen={drawerIsOpen}/>
       </ThemeProvider>
     </div>
   );

@@ -8,10 +8,11 @@ import { WeeklyData } from 'interfaces';
 import { blankData } from './Sidebar-utils';
 
 export interface Props {
-  drawerIsOpen: boolean
+  drawerIsOpen: boolean,
+  drawerHandler: (state?: boolean) => void
 }
 
-const Sidebar: React.FC<Props> = ({ drawerIsOpen }) => {
+const Sidebar: React.FC<Props> = ({ drawerIsOpen, drawerHandler }) => {
   let [weeklyData, setWeeklyData] = useState<WeeklyData>(blankData);
 
   const classes = useStyles();
@@ -26,7 +27,7 @@ const Sidebar: React.FC<Props> = ({ drawerIsOpen }) => {
 
   function generateButtonHandler (e: React.MouseEvent) {
     e.preventDefault();
-    console.log(weeklyData);
+    drawerHandler(false);
   }
 
   return (
