@@ -5,20 +5,27 @@ import useStyles from './Sidebar-styles';
 import DataTable from './DataTable/DataTable';
 import { useState } from 'react';
 import { WeeklyData } from 'interfaces';
-import { blankData } from './Sidebar-utils';
+import { blankData, formHasMissingData } from './Sidebar-utils';
+import Alert from '@material-ui/lab/Alert';
 
 export interface Props {
   drawerIsOpen: boolean,
-  drawerHandler: (state?: boolean) => void
+  drawerHandler: (state?: boolean) => void,
+  calculateCarbon: (input: WeeklyData) => void
 }
 
-const Sidebar: React.FC<Props> = ({ drawerIsOpen, drawerHandler }) => {
+const Sidebar: React.FC<Props> = ({ drawerIsOpen, drawerHandler, calculateCarbon }) => {
   let [weeklyData, setWeeklyData] = useState<WeeklyData>(blankData);
+  let [isDisplayingAlert, setIsDisplayingAlert] = useState<boolean>(false);
 
   const classes = useStyles();
 
   function dataChangeHandler (day: string, key: string, value: string) {
     setWeeklyData(prevData => {
+      let assignedValue;
+      if (key === 'usage') assignedValue = parseFloat(value);
+      else assignedValue = value;
+
       const newState = Object.assign({}, prevData);
       newState[day][key] = value;
       return newState;
@@ -27,7 +34,13 @@ const Sidebar: React.FC<Props> = ({ drawerIsOpen, drawerHandler }) => {
 
   function generateButtonHandler (e: React.MouseEvent) {
     e.preventDefault();
-    console.log(weeklyData);
+    if (formHasMissingData(weeklyData)) {
+      setIsDisplayingAlert(true);
+      setTimeout(() => setIsDisplayingAlert(false), 5000);
+      return;
+    };
+
+    calculateCarbon(weeklyData);
     drawerHandler(false);
   }
 
@@ -52,6 +65,13 @@ const Sidebar: React.FC<Props> = ({ drawerIsOpen, drawerHandler }) => {
             </Button>
           </Box>
         </form>
+
+        {isDisplayingAlert &&
+          <Alert variant="outlined" severity="error" style={{width: '80%', marginTop: '2rem'}}>
+            Please make sure you fill out all fields.
+          </Alert>
+        }
+
       </Box>
     </Drawer>
   );
