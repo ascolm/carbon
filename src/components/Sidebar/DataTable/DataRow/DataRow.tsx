@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { DailyData } from 'interfaces';
-import { TableRow, TableCell, TextField, FormControl, Select, InputLabel, MenuItem } from '@material-ui/core';
+import { TableRow, TableCell, TextField,MenuItem } from '@material-ui/core';
 import { usageIsValid } from './DataRow-utils';
 
 export interface Props {
@@ -57,10 +57,10 @@ const DataRow: React.FC<Props> = ({ day, dayData, dataChangeHandler }) => {
           inputProps={{style: {padding: '0.3rem'}}}
           onChange={(e) => handleChangeIfValid('location', e.target.value)}
         >
-          <MenuItem value='CA'>
+          <MenuItem value='ca'>
             Canada
           </MenuItem>
-          <MenuItem value='US'>
+          <MenuItem value='us'>
             United States
           </MenuItem>
         </TextField>
@@ -71,7 +71,7 @@ const DataRow: React.FC<Props> = ({ day, dayData, dataChangeHandler }) => {
         <TextField
         error={invalidUsage}
         variant='outlined'
-        value={dayData.usage}
+        value={dayData.usage === null ? '' : dayData.usage}
         size='small'
         margin='none'
         inputProps={{style: {padding: '0.3rem'}}}
