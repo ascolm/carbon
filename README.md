@@ -1,5 +1,7 @@
 # Carbon
 
+![carbon](https://user-images.githubusercontent.com/65975591/118505197-df737400-b734-11eb-95be-5773b8603f75.png)
+
 Setup instructions:
 
 1. Clone the repo
@@ -28,3 +30,10 @@ npm start
 ```
 npm test
 ```
+
+Instructions:
+  - Enter time, location and electricity usage (mwh) for each day of the week. 
+  - You can only enter positive decimal numbers in usage field. 
+  - Make sure you fill in all the fields, otherwise the app will complain.
+  - Press enter or click the generate graph button. The app will fetch an estimation of your carbon usage and show you a graph once loaded.
+  - You can open up the menu by clicking on the lightning button at the top left corner and get a new estimation and graph, should you wish to do so.
