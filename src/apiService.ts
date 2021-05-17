@@ -1,8 +1,8 @@
 import config from 'config';
 import { CarbonApiResponse } from 'interfaces';
 
-export async function getCarbonEstimation (location: string, usage: number | null): Promise<CarbonApiResponse>{
-  if (usage === null) usage = 0;
+export async function getCarbonEstimation (location: string, usage: number | ''): Promise<CarbonApiResponse>{
+  if (usage === '') usage = 0;
 
   const bodyParams = {
     type: 'electricity',

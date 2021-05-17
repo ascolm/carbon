@@ -1,15 +1,15 @@
 import './App.css';
-import { useState } from 'react';
-import { WeeklyData, CarbonData } from 'interfaces';
-import projectTheme from 'theme';
-import { ThemeProvider, Container, Box } from '@material-ui/core';
 import useStyles from './App-styles';
+import { useState } from 'react';
+import projectTheme from 'theme';
+import { ThemeProvider, Box } from '@material-ui/core';
+import Alert from '@material-ui/lab/Alert';
 import { CircleSpinner } from 'react-spinners-kit';
+import { WeeklyData, CarbonData } from 'interfaces';
+import { fetchWeeklyCarbonData } from 'App-utils';
 import Topbar from 'components/Topbar/Topbar';
 import Sidebar from 'components/Sidebar/Sidebar';
-import { fetchWeeklyCarbonData } from 'App-utils';
 import Graph from 'components/Graph/Graph';
-import Alert from '@material-ui/lab/Alert';
 
 function App() {
   let [drawerIsOpen, setDrawerIsOpen] = useState<boolean>(true);

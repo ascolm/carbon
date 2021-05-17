@@ -1,7 +1,7 @@
 export interface DailyData {
-  location: string | null,
-  time: string | null,
-  usage: number | null,
+  location: string,
+  time: string,
+  usage: number | '',
   [index: string]: string | number | null
 }
 
