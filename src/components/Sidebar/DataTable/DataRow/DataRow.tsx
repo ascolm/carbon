@@ -41,7 +41,7 @@ const DataRow: React.FC<Props> = ({ day, dayData, dataChangeHandler }) => {
           type='time'
           size='small'
           margin='none'
-          inputProps={{style: {padding: '0.3rem'}}}
+          inputProps={{style: {padding: '0.3rem'}, 'aria-label': `Time input for ${day}`}}
           onChange={(e) => handleChangeIfValid('time', e.currentTarget.value)}
           />
       </TableCell>
@@ -54,9 +54,11 @@ const DataRow: React.FC<Props> = ({ day, dayData, dataChangeHandler }) => {
           value={dayData.location}
           size='small'
           margin='none'
-          inputProps={{style: {padding: '0.3rem'}}}
+          inputProps={{style: {padding: '0.3rem'}, 'aria-label': `Location input for ${day}`}}
           onChange={(e) => handleChangeIfValid('location', e.target.value)}
         >
+          <MenuItem value=''>
+          </MenuItem>
           <MenuItem value='ca'>
             Canada
           </MenuItem>
@@ -74,7 +76,7 @@ const DataRow: React.FC<Props> = ({ day, dayData, dataChangeHandler }) => {
         value={dayData.usage === null ? '' : dayData.usage}
         size='small'
         margin='none'
-        inputProps={{style: {padding: '0.3rem'}}}
+        inputProps={{style: {padding: '0.3rem'}, 'aria-label': `Usage input for ${day}`}}
         onChange={(e) => handleChangeIfValid('usage', e.currentTarget.value)}
         />
       </TableCell>
