@@ -58,6 +58,7 @@ const Sidebar: React.FC<Props> = ({ drawerIsOpen, drawerHandler, calculateCarbon
               type="submit"
               size="small"
               className={classes.button}
+              aria-label='Generate graph button'
               startIcon={<TimelineIcon color='secondary'/>}
               onClick={(e) => generateButtonHandler(e)}
             >
