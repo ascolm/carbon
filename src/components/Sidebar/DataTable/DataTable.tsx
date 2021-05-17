@@ -1,10 +1,9 @@
 import useStyles from './DataTable-styles';
-import { useState } from 'react';
-import { TableContainer, Table, TableRow, TableHead, TableCell, TableBody, Paper, TextField } from '@material-ui/core';
+import { TableContainer, Table, TableRow, TableHead, TableCell, TableBody, Paper } from '@material-ui/core';
 import ScheduleIcon from '@material-ui/icons/Schedule';
 import RoomIcon from '@material-ui/icons/Room';
 import OfflineBoltIcon from '@material-ui/icons/OfflineBolt';
-import { DailyData, WeeklyData } from 'interfaces';
+import { WeeklyData } from 'interfaces';
 import DataRow from './DataRow/DataRow';
 import React from 'react';
 
@@ -42,7 +41,7 @@ const DataTable: React.FC<Props> = ({ weeklyData, dataChangeHandler }) => {
 
         <TableBody>
           {Object.keys(weeklyData).map(day => {
-            return <DataRow day={day} dayData={weeklyData[day]} dataChangeHandler={dataChangeHandler}/>
+            return <DataRow key={day} day={day} dayData={weeklyData[day]} dataChangeHandler={dataChangeHandler}/>
           })}
         </TableBody>
 
